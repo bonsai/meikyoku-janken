@@ -1,4 +1,4 @@
-const CACHE = 'meikyoku-janken-v4';
+const CACHE = 'meikyoku-janken-v5';
 const ASSETS = [
   './',
   './index.html',
