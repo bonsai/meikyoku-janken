@@ -1,4 +1,4 @@
-const CACHE = 'meikyoku-janken-v2';
+const CACHE = 'meikyoku-janken-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -35,16 +35,20 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   const isData = url.pathname.includes('/data/');
 
+  if (isData) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE).then(cache => cache.put(event.request, copy));
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   event.respondWith(
-    isData
-      ? fetch(event.request)
-          .then(response => {
-            const copy = response.clone();
-            caches.open(CACHE).then(cache => cache.put(event.request, copy));
-            return response;
-          })
-          .catch(() => caches.match(event.request))
-      : caches.match(event.request)
-          .then(cached => cached || fetch(event.request))
+    caches.match(event.request).then(cached => cached || fetch(event.request))
   );
 });
