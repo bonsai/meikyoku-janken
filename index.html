@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>aki — 名曲じゃんけん</title>
+<style>
+:root{--pink:#f7dce8;--pink2:#fff0f5;--green:#dcefdc;--green2:#f2faf2;--ink:#405046;--line:#cbdcca;--white:#fffdfd}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:ui-rounded,"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;background:var(--pink2);background-image:radial-gradient(circle at 15% 20%,#ffffffaa 0 28px,transparent 29px),radial-gradient(circle at 80% 12%,#dcefdc88 0 34px,transparent 35px),radial-gradient(circle at 60% 78%,#f7dce888 0 42px,transparent 43px);background-size:180px 180px,230px 230px,260px 260px;min-height:100vh}header{padding:42px 20px 24px;text-align:center}h1{margin:0;font-size:clamp(42px,8vw,72px);font-weight:400;letter-spacing:.08em;color:#718875}header p{margin:8px 0;color:#a77d91}main{max-width:1100px;margin:auto;padding:10px 18px 60px}.card{background:#ffffffc9;border:1px solid var(--line);border-radius:24px;padding:22px;margin:18px 0;box-shadow:0 8px 30px #8ca58a18;backdrop-filter:blur(4px)}h2{font-size:20px;font-weight:500;margin:0 0 16px}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.dow{text-align:center;font-size:12px;padding:6px;color:#9b7b89}.day{min-height:105px;border:1px solid #d8e6d8;border-radius:15px;background:#fffefecf;padding:9px;position:relative}.day:nth-child(7n+1){background:#fff4f8}.day:nth-child(7n+2){background:#f5fbf5}.num{font-size:13px;color:#8b9b8e}.theme{font-size:12px;margin-top:8px}.winner{font-size:11px;margin-top:6px;color:#a16f88}.today{outline:2px solid #e7abc4;outline-offset:2px}.participants{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.person{display:flex;align-items:center;justify-content:space-between;border:1px solid #d9e5d8;border-radius:16px;padding:11px 13px;background:var(--green2)}.person:nth-child(3n){background:var(--pink2)}.name{font-size:14px}.stars{display:flex;gap:2px}.star{border:0;background:none;font-size:23px;line-height:1;padding:0;cursor:pointer;opacity:.28;transition:.15s}.star.on{opacity:1;transform:scale(1.08)}.hint{text-align:center;font-size:12px;color:#9b8b92;margin-top:12px}@media(max-width:600px){.calendar{gap:4px}.day{min-height:78px;padding:6px}.theme,.winner{font-size:9px}.card{padding:14px}}
+</style>
+</head>
+<body>
+<header><h1>aki</h1><p>2026.9.13 — 9.27　15日間の名曲じゃんけん</p></header>
+<main>
+<section class="card"><h2>calendar</h2><div class="calendar" id="calendar"></div></section>
+<section class="card"><h2>participants ★</h2><div class="participants" id="participants"></div><div class="hint">星をクリックして、その日の勝者に★をつけていく</div></section>
+</main>
+<script>
+const days=[
+ ['9/13','果物','おしゃれ泥棒'],['9/14','動物','さぶちゃん'],['9/15','色',''],
+ ['9/16','',''],['9/17','',''],['9/18','',''],['9/19','',''],['9/20','',''],['9/21','',''],
+ ['9/22','',''],['9/23','',''],['9/24','',''],['9/25','',''],['9/26','',''],['9/27','','']
+];
+const participants=['おしゃれ泥棒','さぶちゃん'];
+const cal=document.querySelector('#calendar');
+['日','月','火','水','木','金','土'].forEach(x=>{let e=document.createElement('div');e.className='dow';e.textContent=x;cal.append(e)});
+const first=new Date('2026-09-01').getDay();for(let i=0;i<first;i++){let e=document.createElement('div');e.className='day';e.style.visibility='hidden';cal.append(e)}
+days.forEach((d,i)=>{let e=document.createElement('div');e.className='day'+(d[0]==='9/15'?' today':'');e.innerHTML=`<div class="num">${d[0]}</div><div class="theme">${d[1]||'—'}</div><div class="winner">${d[2]?'★ '+d[2]:''}</div>`;cal.append(e)});
+const box=document.querySelector('#participants');
+participants.forEach((name,pi)=>{let p=document.createElement('div');p.className='person';let stars=document.createElement('div');stars.className='stars';for(let i=0;i<15;i++){let b=document.createElement('button');b.className='star';b.textContent='★';b.title=`Day ${i+1}`;let key=`aki-${pi}-${i}`;if(localStorage.getItem(key)==='1')b.classList.add('on');b.onclick=()=>{b.classList.toggle('on');localStorage.setItem(key,b.classList.contains('on')?'1':'0')};stars.append(b)}p.innerHTML=`<span class="name">${name}</span>`;p.append(stars);box.append(p)});
+</script>
+</body>
+</html>
