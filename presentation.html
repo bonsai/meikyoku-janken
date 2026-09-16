@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>名曲じゃんけん — 企画プレゼン</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#111;color:#fff;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}body{overflow:hidden}.deck{height:100%;display:flex;align-items:center;justify-content:center}.slide{display:none;width:min(1100px,92vw);min-height:min(700px,88vh);padding:7vh 7vw;border:2px solid #fff;border-radius:18px;background:linear-gradient(145deg,#211b18,#0d0d0d);box-shadow:0 20px 80px #000}.slide.active{display:flex;flex-direction:column;justify-content:center}h1{font-size:clamp(42px,7vw,88px);line-height:1.05;margin:0 0 28px}h2{font-size:clamp(30px,5vw,58px);margin:0 0 30px}p,li{font-size:clamp(19px,2.2vw,30px);line-height:1.65}.lead{font-size:clamp(24px,3vw,40px);color:#ffd36a}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{padding:24px;border:1px solid #777;border-radius:12px;background:#191919}.num{position:fixed;right:28px;bottom:20px;color:#aaa}.hint{position:fixed;left:28px;bottom:20px;color:#888}.accent{color:#ffd36a}.flow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:clamp(20px,2.5vw,32px)}.box{border:2px solid #fff;padding:16px 20px;border-radius:10px;background:#151515}.arrow{color:#ffd36a}.small{font-size:18px;color:#aaa}.stars{font-size:48px;letter-spacing:8px}.mock{margin-top:20px;padding:20px;border:2px double #fff;border-radius:10px;background:#080808;font-family:monospace}.bar{height:12px;background:#444;border-radius:99px;overflow:hidden}.bar i{display:block;width:65%;height:100%;background:#ffd36a}@media(max-width:700px){.slide{padding:8vh 7vw}.grid{grid-template-columns:1fr}.hint{display:none}}
+</style>
+</head>
+<body>
+<div class="deck">
+<section class="slide active"><div class="lead">PROJECT IDEA</div><h1>名曲じゃんけん</h1><p>「名曲」を毎日ひとつ選び、みんなで★をつけて遊ぶ十五日間。</p><p class="small">秋場所 9.13 — 9.27</p></section>
+<section class="slide"><h2>何を作りたかったか</h2><p>ただの「曲の人気投票」ではなく、<strong class="accent">毎日ひとつ判断する小さなゲーム</strong>にする。</p><div class="flow"><span class="box">今日の曲</span><span class="arrow">→</span><span class="box">聴く</span><span class="arrow">→</span><span class="box">★を押す</span><span class="arrow">→</span><span class="box">累計</span></div></section>
+<section class="slide"><h2>なぜ「じゃんけん」なのか</h2><p>勝ち負けを厳密に決めるためではなく、<strong>選ぶことをゲーム化する言葉</strong>として使う。</p><div class="grid"><div class="card"><b>曲</b><br>今日の一曲</div><div class="card"><b>人</b><br>参加者それぞれの一票</div><div class="card"><b>時間</b><br>十五日間の場所</div></div></section>
+<section class="slide"><h2>ゲームの最小単位</h2><p>複雑なルールは入れない。</p><div class="mock"><div>DAY 05　今日の名曲</div><h2>🎵 TITLE</h2><div class="stars">☆ ☆ ☆</div><p>★を押して得点</p></div><p class="small">「聴く → ★」までを数秒で終えられることを重視。</p></section>
+<section class="slide"><h2>十五日間にする</h2><p>一日で終わるランキングではなく、<strong class="accent">場所としてのイベント</strong>にする。</p><div class="flow"><span class="box">Day 1</span><span class="arrow">→</span><span class="box">Day 2</span><span class="arrow">→</span><span class="box">…</span><span class="arrow">→</span><span class="box">Day 15</span></div><p>毎日少しずつ参加できるので、「今日は何だろう」が生まれる。</p></section>
+<section class="slide"><h2>データはシンプルに</h2><div class="grid"><div class="card"><b>days.csv</b><p class="small">日付・曲・場所など</p></div><div class="card"><b>participants.csv</b><p class="small">参加者</p></div><div class="card"><b>stars.csv</b><p class="small">誰がどの曲に★を付けたか</p></div></div><p>ゲーム画面とデータを分けることで、企画をあとから育てられる。</p></section>
+<section class="slide"><h2>「完成」ではなく「参加」を設計</h2><p>画面には最初から<strong>「デザインのダメだし受付」</strong>を置く。</p><p class="lead">遊ぶ → 気づく → フィードバック → 直す</p><p>参加者をテスターではなく、ゲームづくりの一部にする。</p></section>
+<section class="slide"><h2>ブラウザだけで運用できる</h2><p>編集画面から十五日間・参加者を管理し、ブラウザ側に保存。CSVとしても書き出せる。</p><p class="small">※現在の実装では、GitHub上のCSVを直接変更するのではなく、この端末のブラウザに反映する方式。</p></section>
+<section class="slide"><h2>企画としてのポイント</h2><div class="grid"><div class="card"><b>小さい</b><p class="small">ルールを一画面に収める</p></div><div class="card"><b>続く</b><p class="small">十五日間という時間を持つ</p></div><div class="card"><b>育つ</b><p class="small">データとフィードバックが残る</p></div></div></section>
+<section class="slide"><div class="lead">THE IDEA</div><h1>名曲を<br>「聴く」から<br>「遊ぶ」へ。</h1><p>小さなルールと十五日間の時間で、音楽をみんなの遊び場にする。</p></section>
+</div>
+<div class="num" id="num"></div><div class="hint">← → / Space　スライド移動</div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let i=0;const num=document.getElementById('num');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));num.textContent=`${i+1} / ${slides.length}`;location.hash=i+1}
+addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();show(i+1)}if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}});
+addEventListener('click',e=>{if(e.target.closest('a'))return;show(i+1)});
+const h=parseInt(location.hash.slice(1),10);if(h)show(h-1);else show(0);
+</script>
+</body>
+</html>
